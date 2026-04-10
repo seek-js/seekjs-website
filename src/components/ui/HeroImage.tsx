@@ -386,7 +386,7 @@ export default function HeroImage() {
             <Tabs.Root
               value={activeMgr}
               onValueChange={setActiveMgr}
-              className="my-[1.5px] w-full max-w-xl overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950 shadow-2xl shadow-zinc-950/40"
+              className="mt-px w-full max-w-xl overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950 shadow-2xl shadow-zinc-950/40"
             >
               <div className="flex items-center border-b border-zinc-800 bg-zinc-900/80">
                 <div className="flex items-center border-r border-zinc-800 px-3 py-2.5 text-zinc-500">

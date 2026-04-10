@@ -1,4 +1,5 @@
 "use client";
+
 import type React from "react";
 import * as Tabs from "@radix-ui/react-tabs";
 import { RiCodeSSlashLine, RiShapesLine } from "@remixicon/react";
@@ -22,49 +23,41 @@ export default function CodeExampleTabs({
         aria-label="Select code"
       >
         <Tabs.Trigger
-          className="group relative flex flex-1 flex-col items-start justify-start rounded-xl p-6 text-left shadow-lg ring-1 ring-gray-200 dark:ring-white/5 dark:data-[state=active]:shadow-gray-900/30"
+          className="group relative flex flex-1 flex-col items-start justify-start rounded-xl p-6 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
           value="tab1"
         >
-          <div className="absolute -left-[36px] top-1/2 hidden -rotate-90 md:group-data-[state=active]:flex">
-            <Arrow
-              width={18}
-              height={8}
-              className="fill-gray-950 dark:fill-gray-900"
-            />
+          <div className="absolute -left-[36px] top-1/2 hidden -translate-y-1/2 -rotate-90 group-data-[state=active]:flex">
+            <Arrow width={18} height={8} />
           </div>
           <div className="flex items-center gap-4">
-            <div className="aspect-square w-fit rounded-lg bg-white p-2 text-gray-700 ring-1 ring-black/10 transition-all group-data-[state=active]:text-gray-600 group-data-[state=active]:shadow-md group-data-[state=active]:shadow-gray-500/20 dark:bg-gray-950 dark:text-gray-400 dark:ring-white/10 dark:group-data-[state=active]:text-gray-400 dark:group-data-[state=active]:shadow-gray-600/50">
+            <div className="aspect-square w-fit rounded-lg bg-white p-2 text-gray-700 ring-1 ring-zinc-200/60 transition-all group-data-[state=active]:text-zinc-700 group-data-[state=active]:shadow-md group-data-[state=active]:shadow-zinc-400/25 dark:bg-zinc-950 dark:text-gray-400 dark:ring-zinc-600/30 dark:group-data-[state=active]:text-zinc-300 dark:group-data-[state=active]:shadow-zinc-600/40">
               <RiShapesLine aria-hidden="true" className="size-5" />
             </div>
-            <p className="font-semibold tracking-tight text-gray-700 transition-all group-data-[state=active]:text-gray-600 sm:text-lg dark:text-gray-400 dark:group-data-[state=active]:text-gray-300">
+            <p className="font-semibold tracking-tight text-zinc-800 transition-all group-data-[state=active]:text-zinc-950 sm:text-lg dark:text-gray-300 dark:group-data-[state=active]:text-gray-100">
               Build: extract &amp; compile
             </p>
           </div>
-          <p className="mt-4 leading-7 text-gray-600 dark:text-gray-400">
-            Stream chunks from your static output, vectorize, and emit a compact
-            .msp for hosting—no runtime crawl or vector DB.
+          <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">
+            Stream chunks from your static output, vectorize, and emit a
+            compact .msp for hosting—no runtime crawl or vector DB.
           </p>
         </Tabs.Trigger>
         <Tabs.Trigger
-          className="group relative flex flex-1 flex-col items-start justify-start rounded-xl p-6 text-left shadow-lg ring-1 ring-gray-200 dark:ring-white/5 dark:data-[state=active]:shadow-gray-900/30"
+          className="group relative flex flex-1 flex-col items-start justify-start rounded-xl p-6 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
           value="tab2"
         >
-          <div className="absolute -left-[36px] top-1/2 hidden -rotate-90 md:group-data-[state=active]:flex">
-            <Arrow
-              width={18}
-              height={8}
-              className="fill-gray-950 dark:fill-gray-900"
-            />
+          <div className="absolute -left-[36px] top-1/2 hidden -translate-y-1/2 -rotate-90 sm:group-data-[state=active]:flex">
+            <Arrow width={18} height={8} />
           </div>
           <div className="flex items-center gap-4">
-            <div className="aspect-square w-fit rounded-lg bg-white p-2 text-gray-700 ring-1 ring-black/10 transition-all group-data-[state=active]:text-gray-600 group-data-[state=active]:shadow-md group-data-[state=active]:shadow-gray-500/20 dark:bg-gray-950 dark:text-gray-400 dark:ring-white/10 dark:group-data-[state=active]:text-gray-400 dark:group-data-[state=active]:shadow-gray-600/50">
+            <div className="aspect-square w-fit rounded-lg bg-white p-2 text-gray-700 ring-1 ring-zinc-200/60 transition-all group-data-[state=active]:text-zinc-700 group-data-[state=active]:shadow-md group-data-[state=active]:shadow-zinc-400/25 dark:bg-zinc-950 dark:text-gray-400 dark:ring-zinc-600/30 dark:group-data-[state=active]:text-zinc-300 dark:group-data-[state=active]:shadow-zinc-600/40">
               <RiCodeSSlashLine aria-hidden="true" className="size-5" />
             </div>
-            <p className="font-semibold tracking-tight text-gray-700 transition-all group-data-[state=active]:text-gray-600 sm:text-lg dark:text-gray-400 dark:group-data-[state=active]:text-gray-300">
+            <p className="font-semibold tracking-tight text-zinc-800 transition-all group-data-[state=active]:text-zinc-950 sm:text-lg dark:text-gray-300 dark:group-data-[state=active]:text-gray-100">
               Runtime: search &amp; AI
             </p>
           </div>
-          <p className="mt-4 leading-7 text-gray-600 dark:text-gray-400">
+          <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">
             Hydrate the index in the browser, run hybrid search locally, then
             call the edge only when you need a streamed, cited answer.
           </p>

@@ -5,6 +5,3 @@ bun.lock
 package-lock.json
 pnpm-lock.yaml
 .env*.local
-
-# Unused components (deleted but kept in git history)
-src/components/ui/GlobalDatabase.tsx
