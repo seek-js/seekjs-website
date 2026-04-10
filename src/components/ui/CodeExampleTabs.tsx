@@ -14,19 +14,22 @@ export default function CodeExampleTabs({
 }) {
   return (
     <Tabs.Root
-      className="mt-14 grid grid-cols-12 gap-8"
+      className="mt-14 grid grid-cols-12 gap-8 overflow-visible md:items-stretch"
       defaultValue="tab1"
       orientation="vertical"
     >
       <Tabs.List
-        className="col-span-full flex w-full flex-col gap-8 md:order-2 md:col-span-5"
+        className="col-span-full flex w-full flex-col gap-4 overflow-visible md:order-2 md:col-span-5 md:min-h-0 md:h-full md:gap-4"
         aria-label="Select code"
       >
         <Tabs.Trigger
-          className="group relative flex flex-1 flex-col items-start justify-start rounded-xl p-6 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
+          className="group relative flex min-h-0 flex-1 flex-col items-start justify-start overflow-visible rounded-xl p-5 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
           value="tab1"
         >
-          <div className="absolute -left-[36px] top-1/2 hidden -translate-y-1/2 -rotate-90 group-data-[state=active]:flex">
+          <div
+            className="pointer-events-none absolute -left-[36px] top-1/2 z-30 hidden -translate-y-1/2 -rotate-90 md:group-aria-selected:flex"
+            aria-hidden
+          >
             <Arrow width={18} height={8} />
           </div>
           <div className="flex items-center gap-4">
@@ -37,16 +40,19 @@ export default function CodeExampleTabs({
               Build: extract &amp; compile
             </p>
           </div>
-          <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">
+          <p className="mt-3 leading-6 text-gray-700 dark:text-gray-300">
             Stream chunks from your static output, vectorize, and emit a
             compact .msp for hosting—no runtime crawl or vector DB.
           </p>
         </Tabs.Trigger>
         <Tabs.Trigger
-          className="group relative flex flex-1 flex-col items-start justify-start rounded-xl p-6 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
+          className="group relative flex min-h-0 flex-1 flex-col items-start justify-start overflow-visible rounded-xl p-5 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
           value="tab2"
         >
-          <div className="absolute -left-[36px] top-1/2 hidden -translate-y-1/2 -rotate-90 sm:group-data-[state=active]:flex">
+          <div
+            className="pointer-events-none absolute -left-[36px] top-1/2 z-30 hidden -translate-y-1/2 -rotate-90 md:group-aria-selected:flex"
+            aria-hidden
+          >
             <Arrow width={18} height={8} />
           </div>
           <div className="flex items-center gap-4">
@@ -57,15 +63,25 @@ export default function CodeExampleTabs({
               Runtime: search &amp; AI
             </p>
           </div>
-          <p className="mt-4 leading-7 text-gray-700 dark:text-gray-300">
+          <p className="mt-3 leading-6 text-gray-700 dark:text-gray-300">
             Hydrate the index in the browser, run hybrid search locally, then
             call the edge only when you need a streamed, cited answer.
           </p>
         </Tabs.Trigger>
       </Tabs.List>
-      <div className="col-span-full md:col-span-7">
-        <Tabs.Content value="tab1">{tab1}</Tabs.Content>
-        <Tabs.Content value="tab2">{tab2}</Tabs.Content>
+      <div className="col-span-full flex min-h-0 flex-col overflow-visible md:col-span-7 md:h-96">
+        <Tabs.Content
+          value="tab1"
+          className="flex min-h-0 flex-1 flex-col outline-none data-[state=inactive]:hidden"
+        >
+          {tab1}
+        </Tabs.Content>
+        <Tabs.Content
+          value="tab2"
+          className="flex min-h-0 flex-1 flex-col outline-none data-[state=inactive]:hidden"
+        >
+          {tab2}
+        </Tabs.Content>
       </div>
     </Tabs.Root>
   );

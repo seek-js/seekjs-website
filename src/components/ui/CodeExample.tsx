@@ -86,7 +86,7 @@ export default function CodeExample() {
             code={codeBuild}
             lang="typescript"
             copy={false}
-            className="h-96"
+            className="min-h-0 flex-1"
           />
         }
         tab2={
@@ -94,7 +94,7 @@ export default function CodeExample() {
             code={codeRuntime}
             lang="tsx"
             copy={false}
-            className="h-96"
+            className="min-h-0 flex-1"
           />
         }
       />
