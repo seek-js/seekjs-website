@@ -1,0 +1,32 @@
+---
+title: Comparison
+description: How Seek.js fits next to static search, vector databases, and AI chat SaaS
+---
+
+# Comparison
+
+This page summarizes the **competitive framing** from the Seek.js README—useful for deciding whether the architecture matches your constraints.
+
+## At a glance
+
+| Category | Examples | Search model | Architecture | Typical cost |
+| --- | --- | --- | --- | --- |
+| Static search | Pagefind, Stork | Lexical | Local-first | $0 (OSS) |
+| Vector databases | Pinecone, Upstash | Vector | Centralized DB | Often **hundreds/month** at production scale |
+| AI chat SaaS | Mendable, Kapa.ai | RAG chat | Centralized API | Usage + storage fees |
+| Hosted search | Algolia, Orama Cloud | Neural / hybrid | Centralized SaaS | Tiered monthly |
+| **Seek.js** | — | **Hybrid** | **Disaggregated** (build → CDN → browser → edge) | **$0 OSS**; optional managed tier |
+
+## When Seek.js is a strong fit
+
+- You already ship a **static or Jamstack** site and want “Ask AI” without provisioning a database cluster.
+- You want **hybrid retrieval** (keyword + semantic) with **local latency** for search results.
+- You are comfortable caching an index artifact in the browser and only calling **edge LLMs** for summaries.
+
+## Honest tradeoffs
+
+- **Index size:** Large sites need quantization, Brotli, and sharding—see the roadmap.
+- **Generative quality:** Edge models are smaller than frontier APIs; citation discipline matters.
+- **Maturity:** Packages are still stabilizing; treat integrations as experimental until versioned releases land.
+
+Return to [Getting Started](/docs) or dive into [Architecture](/docs/architecture) for the full pipeline.

@@ -1,0 +1,41 @@
+---
+title: Getting Started
+description: Learn how to set up Seek.js for your project
+---
+
+Seek.js is a disaggregated AI search framework that moves indexing to build time, search to the browser, and reasoning to the edge—**search that pays for itself** by avoiding the recurring cost and operational burden of hosted vector databases for typical documentation and marketing sites.
+
+## What you build
+
+The framework is organized around four modules:
+
+1. `@seekjs/parser` extracts semantic text from rendered HTML.
+2. `@seekjs/compiler` turns chunks into a compact `.msp` index.
+3. `@seekjs/client` runs hybrid search locally in the browser.
+4. `@seekjs/ai-edge` streams cited answers from the edge.
+
+## Install
+
+```bash
+bun add @seekjs/core
+```
+
+## Quick Start
+
+```typescript
+import { extractHtml } from "@seekjs/parser";
+
+const chunks = await extractHtml({
+  inputDir: "./dist",
+  urlBase: "https://yoursite.com",
+});
+```
+
+## Next steps
+
+- **[Architecture](/docs/architecture)** — Build-time, browser, and edge responsibilities.
+- **[Modules](/docs/modules)** — Package boundaries and how they connect.
+- **[Roadmap](/docs/roadmap)** — Experimental milestones and research tracks.
+- **[Comparison](/docs/comparison)** — How Seek.js differs from static search, vector DBs, and AI chat SaaS.
+
+Seek.js is designed to eliminate the vector database tax by keeping the search index static and the query path local-first. As APIs solidify, this documentation will track versioned releases and migration notes.

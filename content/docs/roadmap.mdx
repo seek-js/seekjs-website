@@ -1,0 +1,26 @@
+---
+title: Roadmap
+description: Experimental milestones and research tracks for Seek.js
+---
+
+# Roadmap
+
+Seek.js is in an **experimental** phase: APIs and on-disk formats may change. The items below mirror the engineering roadmap in the project README—prioritized research, not a shipping guarantee calendar.
+
+## Near-term experiments
+
+1. **Vector sharding** — Split very large `.msp` files into smaller fragments so mobile clients can hydrate incrementally instead of downloading a monolith.
+2. **LLM citation drift** — Measure hallucination rates when the edge model paraphrases retrieved chunks; if citations wander, fall back to structured citation maps.
+3. **IndexedDB cache versioning** — Ensure schema upgrades cleanly invalidate stale caches without bricking offline search.
+4. **Parser stress tests** — Push the WASM pipeline against huge file counts in Bun/Node to find practical limits (file descriptor pressure, memory).
+
+## Product direction
+
+- Harden bundler plugins for **Next.js**, **Astro**, and **Vite** so indexing runs in the default build with minimal config.
+- Expand **MCP**-friendly exports so documentation indexed by Seek.js is easy for agents to consume.
+
+## Business context (README)
+
+The open-source framework targets **$0** self-hosted workflows; a future managed tier (placeholder names in the README: Vaan / Vantage) would automate embedding, CDN hosting, and edge inference for teams that want zero ops.
+
+For how Seek.js positions against alternatives at a glance, see [Comparison](/docs/comparison).

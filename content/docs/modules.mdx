@@ -1,0 +1,106 @@
+---
+title: Modules
+description: The four Seek.js packages and how they connect
+---
+
+# Modules
+
+Seek.js is shipped as focused packages you can adopt incrementally. Together they implement the [architecture](/docs/architecture) pipeline.
+
+## `@seekjs/parser`
+
+**Role:** Extract semantic text from HTML and bind each chunk to a source URL (for citations and deep links).
+
+Typical inputs: your static output directory (`./dist`), a public `urlBase`, optional CSS selectors for main content, and ignore rules for pages you do not want indexed.
+
+```mermaid
+sequenceDiagram
+    participant CI as CI/CD Runner (Node/Bun/Deno)
+    participant FS as File System
+    participant WASM as @seekjs/parser (WASM)
+
+    CI->>FS: Scan /dist directory
+    FS-->>CI: List of .html files
+
+    loop Every 50 files
+        CI->>FS: Open ReadStreams
+        FS->>WASM: Pipe raw HTML bytes
+        WASM->>WASM: Parse tags & bind URL
+        WASM-->>CI: Yield JSON batch
+    end
+```
+
+## `@seekjs/compiler`
+
+**Role:** Turn chunk batches into a compact **`.msp`** binary (MessagePack-serialized index) using your chosen embedder (for example Cloudflare Workers AI embeddings in CI).
+
+This is where schema validation, Orama-backed lexical + vector fusion, and compression/quantization strategies (to fight index bloat) live.
+
+```mermaid
+flowchart TD
+    A[Raw Chunk Batch] --> B{Schema Validation}
+    B -->|Valid| C[Orama Instance]
+
+    C --> D[Lexical Engine]
+    D -->|BM25| F[In-Memory DB]
+
+    C --> E[Embedder Function]
+    E -->|Float32Array Vectors| F
+
+    F --> G[MessagePack Serializer]
+    G --> H[search_index.msp]
+```
+
+## `@seekjs/client`
+
+**Role:** Hydrate the index in the browser: preload, IndexedDB caching with ETag-aware updates, and **hybrid search** in WASM-backed engines.
+
+Framework integrations (for example React hooks) expose `search`, `results`, and lifecycle helpers so you can build widgets that feel instant.
+
+```mermaid
+sequenceDiagram
+    participant UI as Search Widget
+    participant IDB as IndexedDB (Local)
+    participant CDN as Edge CDN (R2)
+
+    UI->>UI: User hovers input (Intent)
+    UI->>IDB: Check cached .msp & ETag
+    UI->>CDN: HEAD /search_index.msp
+    CDN-->>UI: Returns remote ETag
+
+    alt Local ETag == Remote ETag
+        UI->>IDB: Load from cache
+    else Local ETag != Remote ETag
+        UI->>CDN: GET /search_index.msp (Brotli)
+        CDN-->>UI: 600KB Payload
+        UI->>IDB: Overwrite Cache & ETag
+    end
+
+    UI->>UI: Hydrate Orama WASM
+    UI-->>UI: Ready for 15ms Searches!
+```
+
+## `@seekjs/ai-edge`
+
+**Role:** Stream **cited** answers from the edge given `{ query, chunks }`. Providers are pluggable; Cloudflare Workers AI is the reference path in the README.
+
+This package is optional if you only want deterministic search—but it completes the “Ask AI” story without sending your whole corpus to a third-party chat API on every request.
+
+```mermaid
+sequenceDiagram
+    participant Browser as User Browser
+    participant API as Edge API (Cloudflare)
+    participant LLM as Workers AI
+
+    Browser->>Browser: Local Orama Search
+    Browser->>API: POST Query + Top 5 Chunks
+    API->>API: Assemble Context + Prompt
+    API->>LLM: Dispatch Inference Request
+    LLM-->>API: Stream tokens (SSE)
+    API-->>Browser: Relay SSE Stream
+    Browser->>Browser: Render Markdown Citations
+```
+
+---
+
+**Install surface:** Many apps will start from a meta package such as `@seekjs/core` once published; until then, follow the README’s proposed imports per module. See [Getting Started](/docs) for a minimal example.

@@ -1,0 +1,28 @@
+---
+title: Architecture
+description: How Seek.js disaggregates RAG across build time, the browser, and the edge
+---
+
+# Architecture
+
+Seek.js treats AI search as a **static asset** and **edge compute** problem—not a always-on vector database. The pipeline splits work across three places:
+
+## 1. Build-time indexing
+
+During your site build, `@seekjs/parser` extracts semantic text from rendered HTML (WASM-backed parsing), binds chunks to canonical URLs for citations, and streams batches to `@seekjs/compiler`. The compiler vectorizes chunks, validates schema, and emits a compressed binary index (`.msp`) you ship like any other static file.
+
+## 2. Browser hybrid search
+
+`@seekjs/client` (and framework bindings such as `@seekjs/react`) downloads the `.msp` from your CDN, caches it in **IndexedDB**, and runs **hybrid search** (BM25 + vector similarity) entirely in the browser—targeting sub-15ms query latency for local retrieval.
+
+## 3. Edge reasoning (optional)
+
+When a user wants a generative answer—not just search hits—`@seekjs/ai-edge` runs on **Cloudflare Workers** (or similar): the browser sends the query plus locally retrieved chunks; the edge streams a cited response. You only pay for inference when summarization is requested, not for every keystroke.
+
+## Why disaggregate?
+
+- **No vector DB tax:** No Pinecone-style instance running 24/7; the “database” is a static blob on a CDN.
+- **Local-first privacy:** Raw index traffic stays client-side until you explicitly call the edge for AI.
+- **DX like static hosting:** Add a bundler plugin, build, deploy—same mental model as shipping `out/` or `.next/static`.
+
+For package-level APIs and contracts, see [Modules](/docs/modules). For planned research, see [Roadmap](/docs/roadmap).
