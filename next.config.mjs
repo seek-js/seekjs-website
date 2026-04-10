@@ -1,10 +1,30 @@
 import { createMDX } from "fumadocs-mdx/next";
 
 /** @type {import('next').NextConfig} */
+let rawBase = process.env.GITHUB_PAGES_BASE_PATH?.trim() ?? "";
+rawBase = rawBase.replace(/\/$/, "");
+if (rawBase && !rawBase.startsWith("/")) {
+  rawBase = `/${rawBase}`;
+}
+const basePath = rawBase || undefined;
+
 const config = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  // Disable Next.js telemetry for CI
+  telemetry: false,
+  ...(basePath ? { basePath, assetPrefix: basePath } : {}),
 };
 
-export default createMDX({
+const withMDX = createMDX({
   configPath: "./.source/config.ts",
-})(config);
+});
+
+// Add .nojekyll to prevent Jekyll processing
+const nextConfig = withMDX(config);
+
+export default nextConfig;
