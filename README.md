@@ -50,6 +50,33 @@ Visit [http://localhost:3000](http://localhost:3000)
 - Radix UI
 - Shiki (syntax highlighting)
 
+## Deploy to GitHub Pages
+
+This site uses Next.js **static export** (`output: "export"` in [`next.config.mjs`](next.config.mjs)). There is no Node server on Pages; `next start` does not apply. Serve the `out/` folder locally to smoke-test:
+
+```bash
+bun run build
+npx serve out
+```
+
+### CI
+
+1. In the GitHub repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push to `main` runs [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml), which builds with `bun run build` and deploys the `out/` directory.
+
+### Base path (`/<repo>`)
+
+For a **project** site at `https://<user>.github.io/<repo>/`, the workflow sets `GITHUB_PAGES_BASE_PATH=/<repo>` so assets and `/docs` links resolve correctly (see also [`src/lib/source.ts`](src/lib/source.ts)).
+
+For a **user or organization** site where the repository is named `<user>.github.io` (site at `https://<user>.github.io/`), edit the workflow’s “Build static site” step and set `GITHUB_PAGES_BASE_PATH: ""` (empty string) instead of `/${{ github.event.repository.name }}`.
+
+### Local build with a base path
+
+```bash
+GITHUB_PAGES_BASE_PATH=/my-repo bun run build
+npx serve out
+```
+
 ## License
 
 MIT - free for personal and commercial use.

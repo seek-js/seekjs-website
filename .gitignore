@@ -5,3 +5,10 @@ bun.lock
 package-lock.json
 pnpm-lock.yaml
 .env*.local
+
+# OS/editor noise
+.DS_Store
+**/.DS_Store
+Thumbs.db
+*.swp
+*.swo
