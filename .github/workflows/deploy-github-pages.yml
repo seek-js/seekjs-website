@@ -7,8 +7,7 @@ on:
   push:
     branches:
       - main
-      # Remove after merging if you only want production deploys from main
-      - fix/globaldatabase-layout
+  workflow_dispatch:
 
 permissions:
   contents: read

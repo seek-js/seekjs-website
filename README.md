@@ -59,10 +59,7 @@ bun run build
 npx serve out
 ```
 
-### CI
-
-1. In the GitHub repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Push to `main` runs [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml), which builds with `bun run build` and deploys the `out/` directory.
+**CI:** Enable **Settings → Pages → Source: GitHub Actions**. Pushes to **`main`** run [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) (`bun run build`, deploy `out/`). You can also trigger a deploy from **Actions → Run workflow**.
 
 ### Base path (`/<repo>`)
 
