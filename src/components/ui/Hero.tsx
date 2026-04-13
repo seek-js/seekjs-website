@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="mx-auto mt-32 flex w-full max-w-6xl flex-col items-center justify-center px-4 text-center sm:mt-40"
+      className="mx-auto mt-28 flex w-full max-w-6xl flex-col items-center justify-center px-4 text-center sm:mt-40"
     >
       <h1
         id="hero-title"
@@ -45,7 +45,7 @@ export default function Hero() {
         </MetalPrimaryButton>
       </div>
       <div
-        className="relative mx-auto mt-16 h-fit w-full max-w-6xl animate-slide-up-fade px-2 sm:mt-20"
+        className="relative mx-auto mt-12 h-fit w-full max-w-6xl animate-slide-up-fade px-2 sm:mt-20"
         style={{ animationDuration: "1400ms" }}
       >
         <HeroImage />

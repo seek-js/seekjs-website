@@ -14,22 +14,10 @@ export default function Cta() {
     >
       <div className="relative flex items-center justify-center">
         <div
-          className="mask pointer-events-none absolute -z-10 select-none opacity-70"
+          className="cta-grid-bg mask pointer-events-none absolute inset-0 -z-10 select-none opacity-60 sm:opacity-70"
           aria-hidden="true"
         >
-          <div className="flex size-full flex-col gap-2">
-            {Array.from({ length: 20 }, (_, idx) => (
-              <div key={`outer-${idx}`}>
-                <div className="flex size-full gap-2">
-                  {Array.from({ length: 41 }, (_, idx2) => (
-                    <div key={`inner-${idx}-${idx2}`}>
-                      <div className="size-5 rounded-md shadow shadow-zinc-400/30 ring-1 ring-zinc-300/20 dark:shadow-zinc-500/25 dark:ring-zinc-500/10" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <div className="h-full w-full" />
         </div>
         <div className="max-w-4xl">
           <div className="flex flex-col items-center justify-center text-center">

@@ -19,11 +19,11 @@ export default function CodeExampleTabs({
       orientation="vertical"
     >
       <Tabs.List
-        className="col-span-full flex w-full flex-col gap-4 overflow-visible md:order-2 md:col-span-5 md:min-h-0 md:h-full md:gap-4"
+        className="col-span-full flex w-full flex-col gap-4 overflow-visible md:order-2 md:col-span-5 md:h-full md:min-h-0 md:gap-4"
         aria-label="Select code"
       >
         <Tabs.Trigger
-          className="group relative flex min-h-0 flex-1 flex-col items-start justify-start overflow-visible rounded-xl p-5 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
+          className="group relative flex min-h-0 flex-1 flex-col items-start justify-start overflow-visible rounded-xl p-4 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 sm:p-5 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
           value="tab1"
         >
           <div
@@ -46,7 +46,7 @@ export default function CodeExampleTabs({
           </p>
         </Tabs.Trigger>
         <Tabs.Trigger
-          className="group relative flex min-h-0 flex-1 flex-col items-start justify-start overflow-visible rounded-xl p-5 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
+          className="group relative flex min-h-0 flex-1 flex-col items-start justify-start overflow-visible rounded-xl p-4 text-left shadow-md shadow-zinc-400/20 ring-1 ring-zinc-200/60 sm:p-5 dark:shadow-zinc-800/30 dark:ring-zinc-700/30 dark:data-[state=active]:shadow-zinc-700/40"
           value="tab2"
         >
           <div

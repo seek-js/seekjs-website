@@ -74,7 +74,13 @@ export default function HeroImage() {
     const c = cv.getContext("2d");
     if (!c) return;
 
-    const dpr = fmin(devicePixelRatio ?? 1, 2);
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const isSmall =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(max-width: 640px)")?.matches;
+    const dpr = fmin(devicePixelRatio ?? 1, isSmall ? 1.5 : 2);
     let W = 0;
     let H = 0;
     let EDGE_R = 155;
@@ -82,6 +88,8 @@ export default function HeroImage() {
     const pp: Pulse[] = [];
     const ss: Spark[] = [];
     let lastP = 0;
+    let active = false;
+    let paused = false;
 
     function resize() {
       const r = wrap!.getBoundingClientRect();
@@ -97,13 +105,19 @@ export default function HeroImage() {
 
     function seed() {
       nn.length = 0;
-      const count = W < 500 ? 30 : W < 800 ? 50 : 70;
+      const count = reduceMotion
+        ? 0
+        : W < 500
+          ? 18
+          : W < 800
+            ? 34
+            : 55;
       for (let i = 0; i < count; i++)
         nn.push({
           x: rand(16, W - 16),
           y: rand(16, H - 16),
-          vx: rand(-0.28, 0.28),
-          vy: rand(-0.16, 0.16),
+          vx: rand(-0.22, 0.22),
+          vy: rand(-0.12, 0.12),
           r: rand(1.4, 3.4),
           brightness: 0,
           lastHitTime: 0,
@@ -128,15 +142,53 @@ export default function HeroImage() {
     });
     ro.observe(wrap);
 
+    const canHover =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(hover: hover) and (pointer: fine)")?.matches;
     const onMove = (e: MouseEvent) => {
+      if (!canHover) return;
       const r = wrap!.getBoundingClientRect();
       mouse.current = { x: e.clientX - r.left, y: e.clientY - r.top };
     };
     const onLeave = () => (mouse.current = { x: -9e3, y: -9e3 });
-    wrap.addEventListener("mousemove", onMove);
-    wrap.addEventListener("mouseleave", onLeave);
+    if (canHover) {
+      wrap.addEventListener("mousemove", onMove);
+      wrap.addEventListener("mouseleave", onLeave);
+    }
+
+    const onVis = () => {
+      paused = document.visibilityState !== "visible";
+      if (!paused && active && rafId.current === 0) {
+        rafId.current = requestAnimationFrame(frame);
+      }
+      if (paused && rafId.current) {
+        cancelAnimationFrame(rafId.current);
+        rafId.current = 0;
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        active = !!e?.isIntersecting;
+        if (active && !paused && rafId.current === 0) {
+          rafId.current = requestAnimationFrame(frame);
+        }
+        if (!active && rafId.current) {
+          cancelAnimationFrame(rafId.current);
+          rafId.current = 0;
+        }
+      },
+      { root: null, threshold: 0.15 },
+    );
+    io.observe(wrap);
 
     function frame(now: number) {
+      if (!active || paused) {
+        rafId.current = 0;
+        return;
+      }
       c!.clearRect(0, 0, W, H);
 
       /* ambient glow — two focal points for depth */
@@ -168,7 +220,7 @@ export default function HeroImage() {
       c!.fillRect(0, 0, W, H);
 
       /* ── pulses ── */
-      if (now - lastP > PULSE_MS) {
+      if (!reduceMotion && now - lastP > PULSE_MS) {
         lastP = now;
         pp.push({
           cx: rand(W * 0.2, W * 0.8),
@@ -219,15 +271,17 @@ export default function HeroImage() {
         if (n.y < -10) n.y = H + 10;
         if (n.y > H + 10) n.y = -10;
 
-        const md = hypot(n.x - msx, n.y - msy);
-        if (md < 130) {
-          const f = 1 - md / 130;
-          n.brightness = clamp(n.brightness + f * 0.12, 0, 1);
-          n.x += (msx - n.x) * f * 0.01;
-          n.y += (msy - n.y) * f * 0.01;
+        if (canHover && !reduceMotion) {
+          const md = hypot(n.x - msx, n.y - msy);
+          if (md < 130) {
+            const f = 1 - md / 130;
+            n.brightness = clamp(n.brightness + f * 0.12, 0, 1);
+            n.x += (msx - n.x) * f * 0.01;
+            n.y += (msy - n.y) * f * 0.01;
+          }
         }
 
-        if (n.brightness > 0.3 && now - n.lastHitTime < 550) {
+        if (!reduceMotion && n.brightness > 0.3 && now - n.lastHitTime < 550) {
           for (const m of nn) {
             if (m === n) continue;
             const d = hypot(n.x - m.x, n.y - m.y);
@@ -319,13 +373,18 @@ export default function HeroImage() {
       rafId.current = requestAnimationFrame(frame);
     }
 
-    rafId.current = requestAnimationFrame(frame);
+    onVis();
 
     return () => {
-      cancelAnimationFrame(rafId.current);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = 0;
       ro.disconnect();
-      wrap.removeEventListener("mousemove", onMove);
-      wrap.removeEventListener("mouseleave", onLeave);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+      if (canHover) {
+        wrap.removeEventListener("mousemove", onMove);
+        wrap.removeEventListener("mouseleave", onLeave);
+      }
     };
   }, []);
 
