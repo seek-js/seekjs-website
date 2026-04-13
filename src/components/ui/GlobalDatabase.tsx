@@ -107,17 +107,17 @@ export const GlobalDatabase: FunctionComponent = () => {
         ref={sectionRef}
         id="architecture"
         aria-labelledby="global-database-title"
-        className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-3xl bg-zinc-950 pt-24 shadow-xl shadow-zinc-950/25"
+        className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-3xl bg-zinc-100 pt-24 shadow-xl shadow-zinc-400/15 ring-1 ring-zinc-300/45 dark:bg-zinc-950 dark:shadow-zinc-950/25 dark:ring-0"
       >
-        <div className="absolute top-[17rem] size-[40rem] rounded-full bg-zinc-500/25 blur-3xl md:top-[20rem]" />
-        <div className="z-10 inline-block rounded-lg border border-zinc-500/30 bg-zinc-800/40 px-3 py-1.5 font-semibold uppercase leading-4 tracking-tight sm:text-sm">
-          <span className="bg-linear-to-b from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+        <div className="absolute top-[17rem] size-[40rem] rounded-full bg-zinc-300/35 blur-3xl md:top-[20rem] dark:bg-zinc-500/25" />
+        <div className="z-10 inline-block rounded-lg border border-zinc-400/40 bg-zinc-100/70 px-3 py-1.5 font-semibold uppercase leading-4 tracking-tight sm:text-sm dark:border-zinc-500/30 dark:bg-zinc-800/40">
+          <span className="bg-linear-to-b from-zinc-700 to-zinc-500 bg-clip-text text-transparent dark:from-zinc-100 dark:to-zinc-400">
             Made for your website
           </span>
         </div>
         <h2
           id="global-database-title"
-          className="z-10 mt-6 inline-block bg-linear-to-b from-white to-zinc-300 bg-clip-text px-2 text-center text-4xl font-bold tracking-tighter text-transparent sm:text-5xl md:text-8xl"
+          className="z-10 mt-6 inline-block bg-linear-to-b from-zinc-900 to-zinc-500 bg-clip-text px-2 text-center text-4xl font-bold tracking-tighter text-transparent sm:text-5xl md:text-8xl dark:from-white dark:to-zinc-300"
         >
           The global <br /> AI Search Widget
         </h2>
@@ -127,15 +127,15 @@ export const GlobalDatabase: FunctionComponent = () => {
           style={{ width: 1200, height: 1200 }}
         />
         <div className="z-20 -mt-24 h-[42rem] w-full overflow-hidden md:-mt-36 md:h-[36rem]">
-          <div className="absolute bottom-0 left-0 h-3/5 w-full bg-linear-to-b from-transparent via-zinc-950/95 to-zinc-950" />
+          <div className="absolute bottom-0 left-0 h-3/5 w-full bg-linear-to-b from-transparent via-zinc-100/95 to-zinc-100 dark:from-transparent dark:via-zinc-950/95 dark:to-zinc-950" />
           <div className="absolute inset-x-6 bottom-12 z-30 m-auto max-w-4xl md:top-2/3">
-            <div className="grid grid-cols-1 gap-x-10 gap-y-6 rounded-lg border border-zinc-400/20 bg-zinc-950/40 px-6 py-6 shadow-xl shadow-zinc-600/10 blur-subtle md:grid-cols-3 md:p-8">
+            <div className="grid grid-cols-1 gap-x-10 gap-y-6 rounded-lg border border-zinc-300/45 bg-zinc-100/60 px-6 py-6 shadow-xl shadow-zinc-400/15 blur-subtle md:grid-cols-3 md:p-8 dark:border-zinc-400/20 dark:bg-zinc-950/40 dark:shadow-zinc-600/10">
               {features.map((item) => (
                 <div key={item.name} className="flex flex-col gap-2">
-                  <h3 className="bg-linear-to-b from-zinc-200 to-zinc-500 bg-clip-text text-lg font-semibold text-transparent md:text-xl">
+                  <h3 className="bg-linear-to-b from-zinc-800 to-zinc-500 bg-clip-text text-lg font-semibold text-transparent md:text-xl dark:from-zinc-200 dark:to-zinc-500">
                     {item.name}
                   </h3>
-                  <p className="text-sm leading-6 text-zinc-400/80">
+                  <p className="text-sm leading-6 text-zinc-700/85 dark:text-zinc-400/80">
                     {item.description}
                   </p>
                 </div>

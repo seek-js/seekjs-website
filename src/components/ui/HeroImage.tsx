@@ -433,7 +433,7 @@ export default function HeroImage() {
       <div className="rounded-2xl bg-zinc-50/40 p-2 ring-1 ring-inset ring-zinc-200/50 dark:bg-zinc-900/40 dark:ring-zinc-700/20">
         <div
           ref={wrapRef}
-          className="relative w-full overflow-hidden rounded-xl bg-zinc-950 ring-1 ring-zinc-300/30 dark:ring-zinc-600/20"
+          className="relative w-full overflow-hidden rounded-xl bg-zinc-100/80 ring-1 ring-zinc-300/45 dark:bg-zinc-950 dark:ring-zinc-600/20"
         >
           <canvas
             ref={cvRef}
@@ -445,10 +445,10 @@ export default function HeroImage() {
             <Tabs.Root
               value={activeMgr}
               onValueChange={setActiveMgr}
-              className="mt-px w-full max-w-xl overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950 shadow-2xl shadow-zinc-950/40"
+              className="mt-px w-full max-w-xl overflow-hidden rounded-lg border border-zinc-300/60 bg-zinc-100/90 shadow-2xl shadow-zinc-400/20 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-zinc-950/40"
             >
-              <div className="flex items-center border-b border-zinc-800 bg-zinc-900/80">
-                <div className="flex items-center border-r border-zinc-800 px-3 py-2.5 text-zinc-500">
+              <div className="flex items-center border-b border-zinc-300/60 bg-zinc-200/70 dark:border-zinc-800 dark:bg-zinc-900/80">
+                <div className="flex items-center border-r border-zinc-300/60 px-3 py-2.5 text-zinc-600 dark:border-zinc-800 dark:text-zinc-500">
                   <RiTerminalLine className="size-4" />
                 </div>
 
@@ -460,7 +460,7 @@ export default function HeroImage() {
                     <Tabs.Trigger
                       key={m.id}
                       value={m.id}
-                      className="cursor-pointer px-3 py-2.5 text-xs font-medium text-zinc-500 transition-colors hover:text-zinc-300 data-[state=active]:rounded-md data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-200 sm:text-sm"
+                      className="cursor-pointer px-3 py-2.5 text-xs font-medium text-zinc-600 transition-colors hover:text-zinc-900 data-[state=active]:rounded-md data-[state=active]:bg-zinc-300 data-[state=active]:text-zinc-900 sm:text-sm dark:text-zinc-500 dark:hover:text-zinc-300 dark:data-[state=active]:bg-zinc-800 dark:data-[state=active]:text-zinc-200"
                     >
                       {m.label}
                     </Tabs.Trigger>
@@ -469,7 +469,7 @@ export default function HeroImage() {
 
                 <button
                   onClick={handleCopy}
-                  className="ml-auto cursor-pointer border-l border-zinc-800 px-3 py-2.5 text-zinc-500 transition-colors hover:text-zinc-300"
+                  className="ml-auto cursor-pointer border-l border-zinc-300/60 px-3 py-2.5 text-zinc-600 transition-colors hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-300"
                   aria-label="Copy command"
                 >
                   {copied ? (
@@ -496,7 +496,7 @@ export default function HeroImage() {
                   value={m.id}
                   className="mx-1 mt-1.5 mb-1 px-5 py-3.5 text-left sm:px-6 sm:py-4"
                 >
-                  <code className="font-mono text-sm text-zinc-300 sm:text-base">
+                  <code className="font-mono text-sm text-zinc-700 sm:text-base dark:text-zinc-300">
                     {m.cmd}
                   </code>
                 </Tabs.Content>
@@ -541,7 +541,7 @@ export default function HeroImage() {
 
           {/* Bottom fade */}
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-linear-to-t from-zinc-950 via-zinc-950/80 to-transparent sm:h-56 md:h-64"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-linear-to-t from-zinc-100 via-zinc-100/80 to-transparent dark:from-zinc-950 dark:via-zinc-950/80 dark:to-transparent sm:h-56 md:h-64"
             aria-hidden="true"
           />
         </div>
