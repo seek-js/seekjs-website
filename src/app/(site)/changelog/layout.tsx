@@ -1,9 +1,9 @@
-import Balancer from "react-wrap-balancer"
+import Balancer from "react-wrap-balancer";
 
 export default function Layout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <main
@@ -25,5 +25,6 @@ export default function Layout({
       </div>
       <div className="mt-16">{children}</div>
     </main>
-  )
+  );
 }
+
