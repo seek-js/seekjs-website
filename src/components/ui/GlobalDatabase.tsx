@@ -107,7 +107,7 @@ export const GlobalDatabase: FunctionComponent = () => {
         ref={sectionRef}
         id="architecture"
         aria-labelledby="global-database-title"
-        className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-3xl bg-zinc-100 pt-24 dark:bg-zinc-950 dark:shadow-zinc-950/25 dark:ring-0"
+        className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-3xl bg-zinc-100 pt-24 shadow-none dark:bg-zinc-950 dark:shadow-xl dark:shadow-zinc-950/25 dark:ring-0"
       >
         <div className="absolute top-[17rem] size-[40rem] rounded-full bg-zinc-300/35 blur-3xl md:top-[20rem] dark:bg-zinc-500/25" />
         <div className="z-10 inline-block rounded-lg border border-zinc-400/40 bg-zinc-100/70 px-3 py-1.5 font-semibold uppercase leading-4 tracking-tight sm:text-sm dark:border-zinc-500/30 dark:bg-zinc-800/40">
@@ -117,7 +117,7 @@ export const GlobalDatabase: FunctionComponent = () => {
         </div>
         <h2
           id="global-database-title"
-          className="z-10 mt-6 inline-block bg-linear-to-b from-zinc-900 to-zinc-500 bg-clip-text px-2 text-center text-4xl font-bold tracking-tighter text-transparent sm:text-5xl md:text-8xl dark:from-white dark:to-zinc-300"
+          className="z-10 mt-6 inline-block bg-linear-to-b from-zinc-900 to-zinc-500 bg-clip-text px-2 py-2 text-center text-4xl font-bold leading-[1.05] tracking-tighter text-transparent sm:text-5xl md:text-8xl dark:from-white dark:to-zinc-300"
         >
           The global <br /> AI Search Widget
         </h2>

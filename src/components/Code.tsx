@@ -23,13 +23,13 @@ export default async function Code({
   theme = "github-dark",
   className,
 }: Props) {
-  const htmlDark = await codeToHtml(code, {
+  const html = await codeToHtml(code, {
     lang,
-    theme,
-  });
-  const htmlLight = await codeToHtml(code, {
-    lang,
-    theme: "github-light",
+    themes: {
+      light: "github-light",
+      dark: theme,
+    },
+    defaultColor: false,
   });
 
   return (
@@ -47,16 +47,10 @@ export default async function Code({
         </div>
       )}
 
-      <div className="text-sm [&>pre]:overflow-x-auto [&>pre]:py-6 [&>pre]:pl-4 [&>pre]:pr-5 [&>pre]:leading-snug [&_code]:block [&_code]:w-fit [&_code]:min-w-full">
-        <div
-          className="[&>pre]:!bg-zinc-100 dark:hidden"
-          dangerouslySetInnerHTML={{ __html: htmlLight }}
-        ></div>
-        <div
-          className="hidden [&>pre]:!bg-zinc-950 dark:block"
-          dangerouslySetInnerHTML={{ __html: htmlDark }}
-        ></div>
-      </div>
+      <div
+        className="text-sm [&>pre]:overflow-x-auto [&>pre]:py-6 [&>pre]:pl-4 [&>pre]:pr-5 [&>pre]:leading-snug [&>pre]:!bg-zinc-100 dark:[&>pre]:!bg-zinc-950 [&_code]:block [&_code]:w-fit [&_code]:min-w-full"
+        dangerouslySetInnerHTML={{ __html: html }}
+      ></div>
     </div>
   );
 }
