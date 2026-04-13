@@ -73,7 +73,7 @@ export function Navigation() {
             </MetalPrimaryButton>
           </div>
           <div className="flex gap-x-2 md:hidden">
-            <MetalPrimaryButton asChild>
+            <MetalPrimaryButton className="px-3" asChild>
               <Link href="/docs">Get Started</Link>
             </MetalPrimaryButton>
             <Button
@@ -91,16 +91,28 @@ export function Navigation() {
         </div>
         <nav
           className={cx(
-            "my-6 flex text-lg ease-in-out will-change-transform md:hidden",
+            "my-5 flex text-lg ease-in-out will-change-transform md:hidden",
             open ? "" : "hidden",
           )}
         >
           <ul className="space-y-4 font-medium">
             <li>
-              <Link href="/docs" onClick={() => setOpen(false)}>Docs</Link>
+              <Link
+                href="/docs"
+                onClick={() => setOpen(false)}
+                className="inline-flex w-full rounded-lg px-2 py-1.5 text-zinc-950 dark:text-gray-50"
+              >
+                Docs
+              </Link>
             </li>
             <li>
-              <Link href={siteConfig.baseLinks.changelog} onClick={() => setOpen(false)}>Changelog</Link>
+              <Link
+                href={siteConfig.baseLinks.changelog}
+                onClick={() => setOpen(false)}
+                className="inline-flex w-full rounded-lg px-2 py-1.5 text-zinc-950 dark:text-gray-50"
+              >
+                Changelog
+              </Link>
             </li>
           </ul>
         </nav>

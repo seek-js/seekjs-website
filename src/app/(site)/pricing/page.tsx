@@ -1,40 +1,40 @@
-"use client"
-import { Badge } from "@/components/Badge"
-import { MetalPrimaryButton } from "@/components/ui/MetalPrimaryButton"
-import { Label } from "@/components/Label"
-import { Switch } from "@/components/Switch"
-import { Tooltip } from "@/components/Tooltip"
-import { ArrowAnimated } from "@/components/ui/ArrowAnimated"
-import { Faqs } from "@/components/ui/Faqs"
-import Testimonial from "@/components/ui/Testimonial"
-import { cx } from "@/lib/utils"
+"use client";
+import { Badge } from "@/components/Badge";
+import { MetalPrimaryButton } from "@/components/ui/MetalPrimaryButton";
+import { Label } from "@/components/Label";
+import { Switch } from "@/components/Switch";
+import { Tooltip } from "@/components/Tooltip";
+import { ArrowAnimated } from "@/components/ui/ArrowAnimated";
+import { Faqs } from "@/components/ui/Faqs";
+import Testimonial from "@/components/ui/Testimonial";
+import { cx } from "@/lib/utils";
 import {
   RiCheckLine,
   RiCloudLine,
   RiInformationLine,
   RiSubtractLine,
   RiUserLine,
-} from "@remixicon/react"
-import Link from "next/link"
-import React, { Fragment } from "react"
+} from "@remixicon/react";
+import Link from "next/link";
+import React, { Fragment } from "react";
 
-type FixedPrice = string
+type FixedPrice = string;
 
 interface VariablePrice {
-  monthly: string
-  annually: string
+  monthly: string;
+  annually: string;
 }
 
 interface Plan {
-  name: string
-  price: FixedPrice | VariablePrice
-  description: string
-  capacity: string[]
-  features: string[]
-  isStarter: boolean
-  isRecommended: boolean
-  buttonText: string
-  buttonLink: string
+  name: string;
+  price: FixedPrice | VariablePrice;
+  description: string;
+  capacity: string[];
+  features: string[];
+  isStarter: boolean;
+  isRecommended: boolean;
+  buttonText: string;
+  buttonLink: string;
 }
 
 const plans: Plan[] = [
@@ -88,17 +88,17 @@ const plans: Plan[] = [
     buttonText: "Start 14-day trial",
     buttonLink: "#",
   },
-]
+];
 
 interface Feature {
-  name: string
-  plans: Record<string, boolean | string>
-  tooltip?: string
+  name: string;
+  plans: Record<string, boolean | string>;
+  tooltip?: string;
 }
 
 interface Section {
-  name: string
-  features: Feature[]
+  name: string;
+  features: Feature[];
 }
 
 const sections: Section[] = [
@@ -107,20 +107,17 @@ const sections: Section[] = [
     features: [
       {
         name: "Email notifications & webhooks",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Starter: true, Teams: true, Business: true },
       },
       {
         name: "Workspaces",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Starter: "5", Teams: "10", Business: "Unlimited" },
       },
       {
         name: "Storage",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: {
           Starter: "$0.65 per stored GB",
           Teams: "$0.34 per stored GB",
@@ -129,8 +126,7 @@ const sections: Section[] = [
       },
       {
         name: "Seats",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: {
           Starter: "5 users",
           Teams: "Up to 20 users",
@@ -144,20 +140,17 @@ const sections: Section[] = [
     features: [
       {
         name: "Service accounts",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Starter: true, Teams: true, Business: true },
       },
       {
         name: "Admin API",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Teams: true, Business: true },
       },
       {
         name: "No-Code workflow builder",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Starter: "Limited", Teams: "Standard", Business: "Enhanced" },
       },
     ],
@@ -167,20 +160,17 @@ const sections: Section[] = [
     features: [
       {
         name: "Analytics retention",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Starter: "7 days", Teams: "1 year", Business: "Unlimited" },
       },
       {
         name: "Anomaly detection",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Teams: true, Business: true },
       },
       {
         name: "Custom report builder",
-        tooltip:
-          "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
+        tooltip: "Consectetur qui culpa ipsum in ea irure duis culpa incididunt.",
         plans: { Business: true },
       },
     ],
@@ -202,18 +192,18 @@ const sections: Section[] = [
       },
     ],
   },
-]
+];
 
 const isVariablePrice = (
   price: FixedPrice | VariablePrice,
 ): price is VariablePrice => {
-  return (price as VariablePrice).monthly !== undefined
-}
+  return (price as VariablePrice).monthly !== undefined;
+};
 
 export default function Pricing() {
   const [billingFrequency, setBillingFrequency] = React.useState<
     "monthly" | "annually"
-  >("monthly")
+  >("monthly");
   return (
     <div className="px-3">
       <section
@@ -273,10 +263,7 @@ export default function Pricing() {
               {plan.isRecommended ? (
                 <div className="flex h-4 items-center">
                   <div className="relative w-full">
-                    <div
-                      className="absolute inset-0 flex items-center"
-                      aria-hidden="true"
-                    >
+                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
                       <div className="w-full border-t border-indigo-600 dark:border-indigo-400" />
                     </div>
                     <div className="relative flex justify-center">
@@ -320,44 +307,23 @@ export default function Pricing() {
                     </MetalPrimaryButton>
                   </div>
                 </div>
-                <ul
-                  role="list"
-                  className="mt-8 text-sm text-gray-700 dark:text-gray-400"
-                >
+                <ul role="list" className="mt-8 text-sm text-gray-700 dark:text-gray-400">
                   {plan.capacity.map((feature, index) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-x-3 py-1.5"
-                    >
+                    <li key={feature} className="flex items-center gap-x-3 py-1.5">
                       {index === 0 && (
-                        <RiUserLine
-                          className="size-4 shrink-0 text-gray-500"
-                          aria-hidden="true"
-                        />
+                        <RiUserLine className="size-4 shrink-0 text-gray-500" aria-hidden="true" />
                       )}
                       {index === 1 && (
-                        <RiCloudLine
-                          className="size-4 shrink-0 text-gray-500"
-                          aria-hidden="true"
-                        />
+                        <RiCloudLine className="size-4 shrink-0 text-gray-500" aria-hidden="true" />
                       )}
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <ul
-                  role="list"
-                  className="mt-4 text-sm text-gray-700 dark:text-gray-400"
-                >
+                <ul role="list" className="mt-4 text-sm text-gray-700 dark:text-gray-400">
                   {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-x-3 py-1.5"
-                    >
-                      <RiCheckLine
-                        className="size-4 shrink-0 text-indigo-600 dark:text-indigo-400"
-                        aria-hidden="true"
-                      />
+                    <li key={feature} className="flex items-center gap-x-3 py-1.5">
+                      <RiCheckLine className="size-4 shrink-0 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -415,10 +381,7 @@ export default function Pricing() {
                     >
                       {section.features.map((feature) =>
                         feature.plans[plan.name] ? (
-                          <li
-                            key={feature.name}
-                            className="flex gap-x-3 py-2.5"
-                          >
+                          <li key={feature.name} className="flex gap-x-3 py-2.5">
                             <RiCheckLine
                               className="size-5 flex-none text-indigo-600 dark:text-indigo-400"
                               aria-hidden="true"
@@ -594,5 +557,6 @@ export default function Pricing() {
       </section>
       <Faqs />
     </div>
-  )
+  );
 }
+

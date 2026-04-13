@@ -1,4 +1,3 @@
-import AppChrome from "@/components/ui/AppChrome";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
@@ -60,7 +59,7 @@ export default function RootLayout({
           defaultTheme="system"
           disableTransitionOnChange
         >
-          <AppChrome>{children}</AppChrome>
+          {children}
         </ThemeProvider>
       </body>
     </html>
